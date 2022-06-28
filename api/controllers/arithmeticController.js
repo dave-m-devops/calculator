@@ -6,12 +6,8 @@ exports.calculate = function(req, res) {
       return next(err);
     }
 
-    res.status(400);
-    res.json({ error: err.message });
-  });
-
   var operations = {
-    'add':      function(a,b) { return +a + +b },
+    'add':      function(a,b) { return a + b },
     'subtract': function(a,b) { return a - b },
     'multiply': function(a,b) { return a * b },
     'divide':   function(a,b) { return a / b },
@@ -22,6 +18,10 @@ exports.calculate = function(req, res) {
   if (! req.query.operation) {
     throw new Error("Unspecified operation");
   }
+
+    res.status(400);
+    res.json({ error: err.message });
+  });
 
   var operation = operations[req.query.operation];
 
